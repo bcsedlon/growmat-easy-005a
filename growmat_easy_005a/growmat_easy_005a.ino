@@ -723,18 +723,18 @@ void setup() {
 	lcd.print(F("START GSM "));
 	//while(!gsmMgr.proccedGSM()) {
 	for(int i = 59; i >= 0; i--) {
-
-		lcd.setCursor(10, 1);
-		if(i < 10)
-			lcd.print('0');
-		lcd.print(i);
-
 		if(i == 45)
 			sim800l.enableRTC();
 		if(i == 40)
 			sim800l.resetHW();
 		else
 			delay(1000);
+
+		lcd.setCursor(10, 1);
+		if(i < 10)
+			lcd.print('0');
+		lcd.print(i);
+
 		wdt_reset();
 	}
 	gsmMgr.proccedGSM();
@@ -788,7 +788,7 @@ void loop() {
 		}
 		wdt_reset();
 
-		if (secondsCounter % 10 == 0) {
+		if (secondsCounter % 2 == 0) {
 			oneWireSensors.requestTemperatures();
 			temperature = oneWireSensors.getTempCByIndex(0);
 		}

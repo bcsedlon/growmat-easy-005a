@@ -138,8 +138,8 @@ class Alarm {
 	unsigned long timeDeactive;
 
  public:
-	unsigned long alarmActiveDelay = 10000;
-	unsigned long alarmDeactiveDelay = 10000;
+	unsigned long alarmActiveDelay = 30000;
+	unsigned long alarmDeactiveDelay = 30000;
 	bool active;
 	bool unAck;
 
@@ -788,7 +788,7 @@ void loop() {
 		}
 		wdt_reset();
 
-		if (secondsCounter % 2 == 0) {
+		if (secondsCounter % 10 == 0) {
 			oneWireSensors.requestTemperatures();
 			temperature = oneWireSensors.getTempCByIndex(0);
 		}
